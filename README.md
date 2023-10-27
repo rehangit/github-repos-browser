@@ -1,5 +1,7 @@
 # Github Repos Browser
 
+<img alt="Screenshot" src="./docs/screenshot.png" width="50%" style="float: righ"/>
+
 This project implements a simple browser for Github repositories for a give user.
 
 ## Details
@@ -10,8 +12,6 @@ This project implements a simple browser for Github repositories for a give user
 - Allows adjusting fetching from github using sorting and pagination
 - Uses grid controls for pagination, sorting and filtering of the downloaded results
 
-#### Features wish list
+### Features wish list
 
 - Implement full server side query and filtering
-
-### Technical details:
