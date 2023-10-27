@@ -2,8 +2,8 @@ const LOG_LEVEL = localStorage.getItem('LOG_LEVEL') || '';
 
 function contextLogger(...args: any[]) {
   const e = new Error();
-  const context = e.stack?.split('\n')?.[2]?.match(/at (.+) /)?.[1];
-  console.log(`[${context}]`, ...args);
+  const context = e.stack?.split('\n')?.[2]?.match(/at (.+) .+\/(src\/.+\.(ts|js))/);
+  console.log(`[${context?.[2]}:${context?.[1]}]`, ...args);
 }
 
 function noop() {}

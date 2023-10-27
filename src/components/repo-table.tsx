@@ -1,7 +1,9 @@
-import { DataGrid, GridRowProps, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import { getGithubRepos } from '../lib/github';
 import { Link } from '@mui/material';
+import { GithubRepo } from '../interface/github';
+import { RepoFilterParams } from '../interface/filter';
 
 const columns: GridColDef[] = [
   {
@@ -26,31 +28,30 @@ const columns: GridColDef[] = [
 
 type RepoTableProps = {
   user: string;
-  filters: { [k: string]: string };
+  textFilter?: string;
+  repoParams: RepoFilterParams;
 };
 
-export const RepoTable = ({ user, filters }: RepoTableProps) => {
+export const RepoTable = ({ user, textFilter, repoParams }: RepoTableProps) => {
   const [pageSize, setPageSize] = useState(10);
 
-  const [repos, setRepos] = useState<GridRowProps[]>([]);
+  const [repos, setRepos] = useState<GithubRepo[]>([]);
 
   useEffect(() => {
-    getGithubRepos(
-      user,
-      filters.Name,
-      filters?.Type as any,
-      filters?.Sort as any,
-      filters?.Direction as any
-    ).then((data) => {
-      setRepos(data.map((row) => row as unknown as GridRowProps));
+    getGithubRepos(user, repoParams).then((data) => {
+      setRepos(data);
     });
-  }, [user, filters]);
+  }, [user, repoParams]);
 
   return (
     <DataGrid
-      style={{ minHeight: '30vh' }}
+      sx={{ minHeight: 30 }}
       columns={columns}
-      rows={repos}
+      rows={
+        textFilter
+          ? repos.filter((r) => !!`${r.name} ${r.description}`.match(new RegExp(textFilter, 'i')))
+          : repos
+      }
       pageSizeOptions={[10, 30, 100]}
       autoPageSize={false}
       onPaginationModelChange={(ev) => {

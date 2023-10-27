@@ -5,13 +5,19 @@ import { RepoTable } from '../components/repo-table';
 import { getGithubUser } from '../lib/github';
 import { GithubUser } from '../interface/github';
 import { UserInfoCard } from '../components/user-info';
-import { RepoFilters } from '../components/repo-filters';
+import { RepoFiltersBar } from '../components/repo-filters-bar';
+import { RepoFilterParams } from '../interface/filter';
 import log from '../lib/logger';
 
 export const Repos = () => {
   const [user, setUser] = useState('microsoft');
   const [userInfo, setUserInfo] = useState<GithubUser>();
-  const [filters, setFilters] = useState({});
+  const [repoParams, setRepoParams] = useState<RepoFilterParams>({
+    sort: 'full_name',
+    direction: 'asc',
+    type: 'all',
+  });
+  const [textFilter, setTextFilter] = useState<string>('');
 
   useEffect(() => {
     getGithubUser(user).then((data) => {
@@ -20,19 +26,27 @@ export const Repos = () => {
   }, [user]);
 
   useEffect(() => {
-    log('Repos filters changed', { filters });
-  }, [filters]);
+    log('Repos filters changed', { repoParams });
+  }, [repoParams]);
 
   return (
-    <Container fixed maxWidth="lg">
+    <Container>
       <UserInfoCard
         userInfo={userInfo}
         onChangeUser={(newUser: string) => {
           setUser(newUser);
         }}
       />
-      <RepoFilters filters={filters} onFiltersChange={setFilters} />
-      <RepoTable user={user} filters={filters} />
+      <RepoFiltersBar
+        params={repoParams!}
+        text={textFilter}
+        onChange={(text: string, params: RepoFilterParams) => {
+          log('on change handler', { text, params });
+          setTextFilter(text);
+          setRepoParams(params);
+        }}
+      />
+      <RepoTable user={user} textFilter={textFilter} repoParams={repoParams!} />
     </Container>
   );
 };

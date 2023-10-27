@@ -26,15 +26,8 @@ export const UserInfoCard = ({ userInfo, onChangeUser }: UserInfoCardProps) => {
 
   return (
     <>
-      <Card
-        sx={{
-          mt: 2,
-          mb: 2,
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Card sx={{ mt: 2, mb: 2, display: 'flex', justifyContent: 'space-between' }}>
+        <Box>
           <CardContent sx={{ flex: '1 0 auto' }}>
             <Typography variant="h2" component="div">
               {userInfo?.name || ''}
@@ -59,11 +52,11 @@ export const UserInfoCard = ({ userInfo, onChangeUser }: UserInfoCardProps) => {
             </Button>
           </CardActions>
         </Box>
-        <CardMedia sx={{ width: 151 }}>
+        <CardMedia sx={{ m: 2, display: 'flex' }}>
           <Avatar
             alt="githib avatar"
             src={userInfo?.avatar_url}
-            sx={{ height: 150, width: 150 }}
+            sx={{ height: 180, width: 180, justifySelf: 'center' }}
           ></Avatar>
         </CardMedia>
       </Card>

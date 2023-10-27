@@ -43,18 +43,13 @@ export const ModalUserForm = ({ open, user, onUpdate }: ModalUserFormProps) => {
           value={newUser}
           onChange={(e) => handleChange(e.currentTarget.value)}
           onKeyUp={(e) => {
-            if (e.key === 'Enter' && newUser?.length)
-              setTimeout(handleClose(true), 500);
+            if (e.key === 'Enter' && newUser?.length) setTimeout(handleClose(true), 500);
           }}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose()}>Cancel</Button>
-        <Button
-          onClick={handleClose(true)}
-          variant="contained"
-          disabled={!newUser?.length}
-        >
+        <Button onClick={handleClose(true)} variant="contained" disabled={!newUser?.length}>
           Change
         </Button>
       </DialogActions>
