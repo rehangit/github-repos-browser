@@ -4,7 +4,7 @@ import log from '../lib/logger';
 
 type CacheEntry = {
   expiry: number;
-  data: any;
+  data: unknown;
   headers?: object;
 };
 
@@ -21,7 +21,7 @@ const githubFetch = async (path: string): Promise<CacheEntry> => {
   });
   if (cached?.data && cached.expiry < now) return cached;
   const res = await fetch(`https://api.github.com/${path}`).catch(console.error);
-  const headers: any = {};
+  const headers: { [k: string]: string } = {};
   res?.headers?.forEach((v, k) => {
     headers[k] = v;
   });
@@ -40,10 +40,10 @@ const githubFetch = async (path: string): Promise<CacheEntry> => {
   return cache[path];
 };
 
-export const getGithubUser = async (username: string): Promise<GithubUser | {}> => {
+export const getGithubUser = async (username: string): Promise<GithubUser> => {
   const res = await githubFetch('users/' + username);
   log('getGithubUser', res);
-  return res.data;
+  return res.data as GithubUser;
 };
 
 export const getGithubRepos = async (

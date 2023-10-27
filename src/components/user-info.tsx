@@ -16,7 +16,7 @@ import log from '../lib/logger';
 
 type UserInfoCardProps = {
   userInfo?: GithubUser;
-  onChangeUser: Function;
+  onChangeUser: (user: string) => void;
 };
 
 export const UserInfoCard = ({ userInfo, onChangeUser }: UserInfoCardProps) => {

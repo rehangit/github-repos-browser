@@ -8,11 +8,13 @@ import log from '../lib/logger';
 type RepoFiltersBarProps = {
   params: RepoFilterParams;
   text: string;
-  onChange: Function;
+  onChange: (text: string, params: RepoFilterParams) => void;
 };
 
+type Timeout = ReturnType<typeof setTimeout> | null | undefined;
+
 export const RepoFiltersBar = ({ params, text, onChange }: RepoFiltersBarProps) => {
-  let keyupTimer: any = null;
+  let keyupTimer: Timeout = null;
   const [regex, setRegex] = useState(text || '');
 
   const handleChange = (name: string, value: string) => {
@@ -56,7 +58,7 @@ export const RepoFiltersBar = ({ params, text, onChange }: RepoFiltersBarProps) 
             setRegex(e.currentTarget?.value || '');
           }}
           onKeyUp={() => {
-            if (!!keyupTimer) clearTimeout(keyupTimer);
+            if (keyupTimer) clearTimeout(keyupTimer);
             keyupTimer = setTimeout(() => handleChange('text', text), 500);
           }}
         />

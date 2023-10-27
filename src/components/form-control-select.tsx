@@ -8,7 +8,7 @@ type FormSelectProps = {
   name: string;
   values: string[];
   value: string | undefined;
-  onChange: Function;
+  onChange: (name: string, value: string) => void;
 };
 
 export const FormSelect = ({ name, value: current, values, onChange }: FormSelectProps) => {
