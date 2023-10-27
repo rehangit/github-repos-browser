@@ -1,5 +1,3 @@
-import '@fontsource/inter';
-
 import { Repos } from './pages/repos';
 
 import './App.css';

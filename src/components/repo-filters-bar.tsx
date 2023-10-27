@@ -1,4 +1,4 @@
-import { Grid, TextField, Typography } from '@mui/material';
+import { Grid, TextField } from '@mui/material';
 import { Box } from '@mui/material';
 import { FormSelect } from './form-control-select';
 import { RepoFilterParams } from '../interface/filter';
@@ -54,9 +54,6 @@ export const RepoFiltersBar = ({ params, text, onChange }: RepoFiltersBarProps) 
           defaultValue={text}
           onChange={(e) => {
             setRegex(e.currentTarget?.value || '');
-          }}
-          onBlur={(e) => {
-            handleChange('text', regex);
           }}
           onKeyUp={() => {
             if (!!keyupTimer) clearTimeout(keyupTimer);
