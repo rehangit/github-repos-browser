@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Container } from '@mui/material';
+import Container from '@mui/material/Container';
 
 import { RepoTable } from '../components/repo-table';
 import { getGithubUser } from '../lib/github';
@@ -17,6 +17,7 @@ export const Repos = () => {
     direction: 'asc',
     type: 'all',
   });
+
   const [textFilter, setTextFilter] = useState<string>('');
 
   useEffect(() => {
@@ -25,9 +26,11 @@ export const Repos = () => {
     });
   }, [user]);
 
-  useEffect(() => {
-    log('Repos filters changed', { repoParams });
-  }, [repoParams]);
+  const handleRepoFilterChange = (text: string, params: RepoFilterParams) => {
+    log('on change handler', { text, params });
+    setTextFilter(text);
+    setRepoParams(params);
+  };
 
   return (
     <Container>
@@ -37,15 +40,7 @@ export const Repos = () => {
           setUser(newUser);
         }}
       />
-      <RepoFiltersBar
-        params={repoParams!}
-        text={textFilter}
-        onChange={(text: string, params: RepoFilterParams) => {
-          log('on change handler', { text, params });
-          setTextFilter(text);
-          setRepoParams(params);
-        }}
-      />
+      <RepoFiltersBar params={repoParams!} text={textFilter} onChange={handleRepoFilterChange} />
       <RepoTable user={user} textFilter={textFilter} repoParams={repoParams!} />
     </Container>
   );

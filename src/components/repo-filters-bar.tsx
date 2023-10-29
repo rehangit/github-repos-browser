@@ -1,8 +1,11 @@
-import { Grid, TextField } from '@mui/material';
-import { Box } from '@mui/material';
+import { useState } from 'react';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+
 import { FormSelect } from './form-control-select';
 import { RepoFilterParams } from '../interface/filter';
-import { useState } from 'react';
+
 import log from '../lib/logger';
 
 type RepoFiltersBarProps = {

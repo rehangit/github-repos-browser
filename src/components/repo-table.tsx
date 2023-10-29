@@ -1,7 +1,9 @@
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
+import { GridColDef } from '@mui/x-data-grid';
+import DataGrid from '@mui/x-data-grid/DataGrid';
+import Link from '@mui/material/Link';
+
 import { getGithubRepos } from '../lib/github';
-import { Link } from '@mui/material';
 import { GithubRepo } from '../interface/github';
 import { RepoFilterParams } from '../interface/filter';
 

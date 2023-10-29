@@ -45,7 +45,7 @@ describe('GitHub API Functions', () => {
     it('should invoke fetch with correct params', async () => {
       await getGithubRepos(username, filters);
       expect(fetchMock).toHaveBeenLastCalledWith(
-        'https://api.github.com/users/testuser/repos?type=owner&sort=full_name&direction=asc'
+        'https://api.github.com/users/testuser/repos?type=owner&sort=full_name&direction=asc',
       );
     });
     it('should get GitHub repositories', async () => {

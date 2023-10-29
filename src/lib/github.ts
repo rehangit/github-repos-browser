@@ -48,12 +48,12 @@ export const getGithubUser = async (username: string): Promise<GithubUser> => {
 
 export const getGithubRepos = async (
   userName: string,
-  filters: RepoFilterParams
+  filters: RepoFilterParams,
 ): Promise<GithubRepo[]> => {
   const { type = 'owner', sort = 'full_name' } = filters || {};
   const { direction = type === 'owner' ? 'asc' : 'desc' } = filters || {};
   const res = await githubFetch(
-    `users/${userName}/repos?type=${type}&sort=${sort}&direction=${direction}`
+    `users/${userName}/repos?type=${type}&sort=${sort}&direction=${direction}`,
   );
   const repos = res.data as GithubRepo[];
   log('filtered result', { repos });
