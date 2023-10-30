@@ -9,6 +9,6 @@ export interface GithubRepo {
   name: string;
   description: string;
   stargazers_count: number;
-  issues_count: number;
+  open_issues_count: number;
   forks_count: number;
 }

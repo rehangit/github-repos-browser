@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GridColDef } from '@mui/x-data-grid';
-import DataGrid from '@mui/x-data-grid/DataGrid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Link from '@mui/material/Link';
 
 import { getGithubRepos } from '../lib/github';
@@ -23,7 +22,7 @@ const columns: GridColDef[] = [
     },
   },
   { field: 'stargazers_count', headerName: '☆' },
-  { field: 'issues_count', headerName: '⊙' },
+  { field: 'open_issues_count', headerName: '⊙' },
   { field: 'forks_count', headerName: '⑃' },
   { field: 'description', headerName: 'Description', flex: 1 },
 ];
